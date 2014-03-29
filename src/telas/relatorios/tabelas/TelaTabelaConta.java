@@ -11,6 +11,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,19 +30,15 @@ import telas.TelaPrincipal;
 import util.HibernateUtil;
 
 public class TelaTabelaConta extends javax.swing.JFrame {
-    
-    
-    
-    // modificação 
-    
+      
    private CaixaCompletoTableModel pModelTela;
    private CaixaCompletoTableModel pModelBanco;
    
    private final int _socio;
    private final int _logradouro;
    private final int _status;
-   private boolean atrasadasqtd   =false;
-   private boolean carneqtd       =false;
+   private boolean existeAtraso   =false;
+   private boolean existeCarne       =false;
    
    private final int checkSocio              =1;
    private final int checkLogradouro         =2;
@@ -55,6 +54,12 @@ public class TelaTabelaConta extends javax.swing.JFrame {
    
    private final int EscolhaSocio = 1;
    private final int EscolhaEndereco =2;
+   
+    
+   String sqlnormal    ="";
+   String sqlatrasadas ="";
+   String sqlCarne     ="";
+   
    
     public TelaTabelaConta() {
         
@@ -817,26 +822,27 @@ public class TelaTabelaConta extends javax.swing.JFrame {
            @SuppressWarnings("empty-statement")
            public void run() {
                
-               String sqlnormal=" WHERE ";
-               String sqlatrasadas =" WHERE ";
-               String sqlCarne     = " WHERE ";
+               sqlnormal    =" WHERE ";
+               sqlatrasadas =" WHERE ";
+               sqlCarne     =" WHERE ";
                
+               //tem algum valor na tela para ser impresso?
                if(pModelTela.getRowCount()<1){
                    JOptionPane.showMessageDialog(null,"É preciso Haver pelo menos um Elemento para ser Exportado");
                }
                
                else{
+
+                   Calendar c60 = Calendar.getInstance();
+                   Calendar dataConta = Calendar.getInstance();
+                   c60.set(Calendar.MONTH, -2 );
                    
-                   Date d = new Date();
-                   d.setDate(d.getDate() - 60);
                    
                    for (int i = 0; i < pModelTela.getRowCount(); i++) {
                        
-                       //quem vai sair no relatorio de contas
-                       
                        //quem vai receber o relatorio de socio
                        if(pModelTela.getLinha(i).getSocioExclusivo()==true){
-                           carneqtd = true;
+                           existeCarne = true;
                            if(i==0){sqlCarne+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
                            else    {sqlCarne+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
                            
@@ -846,15 +852,27 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                            if(i==0){sqlnormal+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
                            else    {sqlnormal+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
                        }
-                       //aqui somente quem vai sair nos atrasadados de 60 das ou mais
-                       Date d1 = pModelTela.getLinha(i).getPagamento();
-                       if ((d1 == null)||
-                               (pModelTela.getLinha(i).getVencimento().before(d)))
-                       {
-                           atrasadasqtd = true;
+                       
+                       //converter data pra calendar
+                       
+                            
+                       //quem vai receber uma carta de cobrança?
+                       //quem tem o pagamento como nulo
+                       //e o vencimento esta atrasado a mais de 60 dias
+                        Date dconta = pModelTela.getLinha(i).getVencimento();
+                        dataConta.setTime(dconta);
+                       
+                       
+                       if (
+                          (pModelTela.getLinha(i).getPagamento() == null)&&
+                          (dataConta.after(c60))         
+                           )
+                            {
+                          
+                           existeAtraso = true;
                            if(i == 0){sqlatrasadas += "\n c.id = "    + pModelTela.getLinha(i).getNumeroconta();}
                            else      {sqlatrasadas += "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
-                       }
+                            }
                    }
                }
                
@@ -865,18 +883,18 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                
                relatar("/relatorios/rc_novaConta.jasper", sqlnormal);
                
-               if(atrasadasqtd==true){
+               if(existeAtraso==true){
                    relatar("/relatorios/rc_cobranca.jasper", sqlatrasadas );
                }
-               if(carneqtd==true)
+               if(existeCarne==true)
                {
-                   JOptionPane.showMessageDialog(null, "vão sair aqui os carnes de socio");
+                   JOptionPane.showMessageDialog(null, "A funcionalidade para carne de socios ainda não esta pronta");
                }
                
            }
        };
       t.start();
-        
+        limparVariaveisDeImpressaoConta();
       
     }//GEN-LAST:event_jButtonExportarActionPerformed
 
@@ -1270,13 +1288,22 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     }
     
     private boolean setAtrasadas(boolean qtd){
-        atrasadasqtd = qtd;
-    return atrasadasqtd;
+        existeAtraso = qtd;
+    return existeAtraso;
     }
     
     private boolean getAtrasadsa()
     {
-    return atrasadasqtd;
+    return existeAtraso;
+    }
+    
+    private void limparVariaveisDeImpressaoConta(){
+     sqlnormal    ="  ";
+     sqlatrasadas ="  ";
+     sqlCarne ="  ";
+     existeCarne = false;
+     existeAtraso = false;
+    
     }
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
