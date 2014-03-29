@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="376fec90-44db-46c4-98f6-3086e571f0bb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pessoa.`nome` AS pessoa_nome,
+     saida.`valor` AS saida_valor,
+     saida.`favorecido` AS saida_favorecido,
+     funcionario.`matricula` AS funcionario_matricula
+FROM
+     `pessoa` pessoa INNER JOIN `funcionario` funcionario ON pessoa.`id` = funcionario.`idPessoa`
+     INNER JOIN `saida` saida ON funcionario.`id` = saida.`idfuncionario`]]>
+	</queryString>
+	<field name="pessoa_nome" class="java.lang.String"/>
+	<field name="saida_valor" class="java.math.BigDecimal"/>
+	<field name="saida_favorecido" class="java.lang.String"/>
+	<field name="funcionario_matricula" class="java.lang.Integer"/>
+	<variable name="saida_valor_1" class="java.math.BigDecimal" resetType="Group" resetGroup="pessoa_nome" calculation="Sum">
+		<variableExpression><![CDATA[$F{saida_valor}]]></variableExpression>
+	</variable>
+	<group name="pessoa_nome">
+		<groupExpression><![CDATA[$F{pessoa_nome}]]></groupExpression>
+		<groupFooter>
+			<band height="50">
+				<textField>
+					<reportElement uuid="517e5c5b-abd9-4d3f-820e-f40d3fb27845" x="116" y="23" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{saida_valor_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="05249eb4-6c36-4463-b4a8-24dfb3b2ddc7" x="9" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[pessoa_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="42b375d4-dc73-49c8-9d65-044fa096e7c8" x="109" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[saida_valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9a08fb96-eeb0-4f98-a03e-468edc535142" x="219" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[saida_favorecido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="2ea75843-090e-4de1-8c3d-0706b7458be7" x="9" y="72" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pessoa_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1cbe1d4e-14f9-4635-bb56-accd256fbe8c" x="109" y="78" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{saida_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="83815011-0d05-4b80-b17b-2361e200d206" x="219" y="88" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{saida_favorecido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

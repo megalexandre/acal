@@ -1,0 +1,36 @@
+ID:1	IDOriginal:6	dataAlteração:2013-04-01 02:55:53.0	IdCedente:5	IdFuncionario:3	MotivoEntrada:2	Valor:15.00	Tipo:insert
+
+ID:2	IDOriginal:9	dataAlteração:2013-04-01 02:56:26.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:23.00	Tipo:insert
+
+ID:3	IDOriginal:10	dataAlteração:2013-04-01 13:16:50.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:50.00	Tipo:insert
+
+ID:4	IDOriginal:11	dataAlteração:2013-04-01 13:17:04.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:25.00	Tipo:insert
+
+ID:5	IDOriginal:12	dataAlteração:2013-04-07 00:36:46.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:50.00	Tipo:insert
+
+ID:6	IDOriginal:12	dataAlteração:2013-04-07 00:37:00.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:50.00	Tipo:delete
+
+ID:7	IDOriginal:12	dataAlteração:2013-04-07 08:53:44.0	IdCedente:4	IdFuncionario:3	MotivoEntrada:1	Valor:13.00	Tipo:insert
+
+ID:8	IDOriginal:13	dataAlteração:2013-04-07 09:40:43.0	IdCedente:4	IdFuncionario:1	MotivoEntrada:1	Valor:500.00	Tipo:insert
+
+ID:9	IDOriginal:14	dataAlteração:2013-04-07 09:40:43.0	IdCedente:4	IdFuncionario:1	MotivoEntrada:1	Valor:250.00	Tipo:insert
+
+ID:10	IDOriginal:15	dataAlteração:2013-04-07 09:41:13.0	IdCedente:4	IdFuncionario:2	MotivoEntrada:1	Valor:50.00	Tipo:insert
+
+ID:11	IDOriginal:16	dataAlteração:2013-04-07 09:41:13.0	IdCedente:4	IdFuncionario:2	MotivoEntrada:1	Valor:50.00	Tipo:insert
+
+ID:12	IDOriginal:19	dataAlteração:2013-04-07 12:19:56.0	IdCedente:4	IdFuncionario:2	MotivoEntrada:1	Valor:450.00	Tipo:insert
+
+ID:13	IDOriginal:20	dataAlteração:2013-04-07 12:21:07.0	IdCedente:4	IdFuncionario:1	MotivoEntrada:1	Valor:34.65	Tipo:insert
+
+ID:14	IDOriginal:20	dataAlteração:2013-04-07 12:22:54.0	IdCedente:4	IdFuncionario:1	MotivoEntrada:1	Valor:34.65	Tipo:delete
+
+ID:15	IDOriginal:19	dataAlteração:2013-04-07 12:22:54.0	IdCedente:4	IdFuncionario:2	MotivoEntrada:1	Valor:450.00	Tipo:delete
+
+ID:16	IDOriginal:17	dataAlteração:2013-05-20 16:03:31.0	IdCedente:4	IdFuncionario:1	MotivoEntrada:3	Valor:50.00	Tipo:insert
+
+ID:17	IDOriginal:18	dataAlteração:2013-05-20 16:04:48.0	IdCedente:6	IdFuncionario:4	MotivoEntrada:1	Valor:1000.00	Tipo:insert
+
+ID:18	IDOriginal:19	dataAlteração:2013-05-23 18:56:50.0	IdCedente:6	IdFuncionario:1	MotivoEntrada:1	Valor:12.00	Tipo:insert
+
