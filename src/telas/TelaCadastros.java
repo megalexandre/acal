@@ -86,6 +86,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jFormattedCNPJ.setEditable(false);
         jRadioCPFCNPJ.setEnabled(false);
         jCheckBoxExclusivamenteSocio.setEnabled(false);
+        jCheckBoxReceitaAvulsa.setEnabled(cadastrar);
     }
 
     public TelaCadastros(JFrame telaPrincipal) {
@@ -3597,7 +3598,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, 0)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 995, Short.MAX_VALUE))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -6030,6 +6031,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         
         limparCamposReceita();
         
+        jCheckBoxReceitaAvulsa.setEnabled(true);
         setEditableComponentesReceita(true);
         jButtonReceitaNovo.setEnabled(false);
         jButtonReceitaApagar.setEnabled(false);
@@ -6088,7 +6090,6 @@ public class TelaCadastros extends javax.swing.JFrame {
 
     private void jButtonReceitaEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReceitaEditarActionPerformed
         
-        
         setEditableComponentesReceita(true);
         jButtonReceitaApagar.setEnabled(false);
         jButtonReceitaEditar.setEnabled(false);
@@ -6132,7 +6133,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                    
                    try{
                        Entrada e = new Entrada();
-                       
+              
                        e.setData(jDateChooser1.getDate());
                        e.setValor(BigDecimal.valueOf(Double.parseDouble(jTextFieldReceitaValor.getText())));
                        e.setObservacao(jTextAreaReceitaObservacao.getText());
@@ -6158,8 +6159,7 @@ public class TelaCadastros extends javax.swing.JFrame {
             }else{
                  int op = JOptionPane.showConfirmDialog(this, "Confirma a alteração desse registro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                  if(op == JOptionPane.YES_OPTION){
-                     
-                     
+                                          
                      try{
                        
                        Entrada e = new DaoEntradas().EntradaPorId(Integer.parseInt(jTextFieldReceitaID.getText()));
@@ -6172,7 +6172,11 @@ public class TelaCadastros extends javax.swing.JFrame {
                       e.setIdFuncionario(p.getFuncionario());
                       
                       p = new DaoPessoa().BuscarNomeCompleto((String)jComboBoxReceitaSocio.getSelectedItem());
-                      e.setIdCedente(p.getSocio());
+                      if(p.getSocio()!=null)
+                      {
+                           e.setIdCedente(p.getSocio());
+                      }
+                     
                       
                       List<Motivoentrada> entrada = new DaoMotivoEntrada().BuscarMotivoEntradaLikeNome((String)jComboBoxReceitaMotivoEntrada.getSelectedItem());
                        e.setIdMotivoEntrada(entrada.get(0));
@@ -7072,7 +7076,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jButtonReceitaCancelar.setEnabled(edit);
         jButtonReceitaEditar.setEnabled(edit);
         jButtonReceitaSalvar.setEnabled(edit);
-        
+        jCheckBoxReceitaAvulsa.setEnabled(edit);
         
         
     }
