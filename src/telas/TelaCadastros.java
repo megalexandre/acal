@@ -6151,7 +6151,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                        
                         JOptionPane.showMessageDialog(this, "Registro gravado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
                        jButtonReceitaCancelarActionPerformed(evt);
-                   }catch(Exception e){
+                   }catch(NumberFormatException | HeadlessException e){
                        JOptionPane.showMessageDialog(this, "Erro ao gravar o registro 3", "Erro", JOptionPane.ERROR_MESSAGE);
                    }                 
                }

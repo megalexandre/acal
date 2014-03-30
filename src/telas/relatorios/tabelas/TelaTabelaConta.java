@@ -1,6 +1,7 @@
 package telas.relatorios.tabelas;
 
 import TableModel.CaixaCompletoTableModel;
+import TableModel.render.Render;
 import dao.view.DaoCaixaView;
 import dao.view.DaoContaView;
 import dao.view.DaoEnderecoView;
@@ -96,11 +97,13 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     }
     
    public void ConfigurarTabela(){
-    jTableBanco.setModel(pModelBanco);
-    jTableTela .setModel(pModelTela);
-    adicionarEventosTela(jTableTela);
-    adicionarEventosBanco(jTableBanco);
-   
+    jTabBanco.setModel(pModelBanco);
+    jTabTela .setModel(pModelTela);
+    adicionarEventosTela(jTabTela);
+    adicionarEventosBanco(jTabBanco);
+    jTabTela.setDefaultRenderer(Object.class, new Render());
+    jTabBanco.setDefaultRenderer(Object.class, new Render());
+    
    }
    
    public void contar()
@@ -196,15 +199,15 @@ public class TelaTabelaConta extends javax.swing.JFrame {
           {
               for (int i = 0; i < pModelTela.getRowCount(); i++) {
                 if( pModelTela.getLinha(i).getNumeroconta() ==
-                    pModelBanco.getLinha(jTableBanco.getSelectedRow()).getNumeroconta())
+                    pModelBanco.getLinha(jTabBanco.getSelectedRow()).getNumeroconta())
                 {
                  flag=false;
                 JOptionPane.showMessageDialog(null,"Essa linha já foi adcionda");
                 }
               }
               if(flag==true){
-              pModelTela.addLinha(pModelBanco.getLinha(jTableBanco.getSelectedRow()));
-              pModelBanco.removeLinha(jTableBanco.getSelectedRow());
+              pModelTela.addLinha(pModelBanco.getLinha(jTabBanco.getSelectedRow()));
+              pModelBanco.removeLinha(jTabBanco.getSelectedRow());
               }
            contar();
           }
@@ -228,7 +231,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
      { 
         if (e.getClickCount() == 2) 
         {  
-        pModelTela.removeLinha(jTableTela.getSelectedRow());
+        pModelTela.removeLinha(jTabTela.getSelectedRow());
         contar();
         }
      }
@@ -253,7 +256,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableTela = new javax.swing.JTable();
+        jTabTela = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTotalTela = new javax.swing.JTextField();
@@ -306,14 +309,14 @@ public class TelaTabelaConta extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableBanco = new javax.swing.JTable();
+        jTabBanco = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/img/ico.png")).getImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTableTela.setModel(new javax.swing.table.DefaultTableModel(
+        jTabTela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -324,7 +327,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTableTela);
+        jScrollPane1.setViewportView(jTabTela);
 
         jLabel1.setText("Contas Prontas para a Impressão");
 
@@ -751,7 +754,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
-        jTableBanco.setModel(new javax.swing.table.DefaultTableModel(
+        jTabBanco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -762,7 +765,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTableBanco);
+        jScrollPane2.setViewportView(jTabBanco);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1384,8 +1387,8 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableBanco;
-    private javax.swing.JTable jTableTela;
+    private javax.swing.JTable jTabBanco;
+    private javax.swing.JTable jTabTela;
     private javax.swing.JTextField jTotalBanco;
     private javax.swing.JTextField jTotalTela;
     private javax.swing.JTextField jValorAtrasadasBanco;
