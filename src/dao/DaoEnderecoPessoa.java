@@ -5,7 +5,7 @@
 package dao;
 
 import entidades.Enderecopessoa;
-import entidades.view.Geracaocontas;
+import entidades.Geracaocontas;
 import entidades.Pessoa;
 import java.math.BigInteger;
 import java.util.List;

@@ -4,7 +4,7 @@
  */
 package dao.view;
 
-import entidades.view.CaixaView;
+import entidades.CaixaView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

@@ -4,7 +4,7 @@
  */
 package TableModel;
 
-import entidades.view.CaixaView;
+import entidades.CaixaView;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;

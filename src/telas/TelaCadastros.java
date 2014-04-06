@@ -30,7 +30,7 @@ import entidades.Saida;
 import entidades.Socio;
 import entidades.Sociotabela;
 import entidades.Taxa;
-import entidades.view.SociosView;
+import entidades.SociosView;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;

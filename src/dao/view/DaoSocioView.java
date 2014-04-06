@@ -4,7 +4,7 @@
  */
 package dao.view;
 
-import entidades.view.SociosView;
+import entidades.SociosView;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;

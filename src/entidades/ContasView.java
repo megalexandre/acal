@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades.view;
+package entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Head
  */
 @Entity
-@Table(name = "rc_caixa_completo")
+@Table(name = "contas_view")
 @XmlRootElement
 
-public class RcCaixaCompleto implements Serializable {
+public class ContasView implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "numeroconta")
@@ -40,6 +40,10 @@ public class RcCaixaCompleto implements Serializable {
     @Column(name = "vencimento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date vencimento;
+    @Column(name = "MesReferente")
+    private String mesReferente;
+    @Column(name = "AnoReferente")
+    private Integer anoReferente;
     @Column(name = "socio")
     private String socio;
     @Column(name = "endereco")
@@ -67,7 +71,7 @@ public class RcCaixaCompleto implements Serializable {
     @Column(name = "totalconta")
     private Double totalconta;
 
-    public RcCaixaCompleto() {
+    public ContasView() {
     }
 
     public int getNumeroconta() {
@@ -100,6 +104,22 @@ public class RcCaixaCompleto implements Serializable {
 
     public void setVencimento(Date vencimento) {
         this.vencimento = vencimento;
+    }
+
+    public String getMesReferente() {
+        return mesReferente;
+    }
+
+    public void setMesReferente(String mesReferente) {
+        this.mesReferente = mesReferente;
+    }
+
+    public Integer getAnoReferente() {
+        return anoReferente;
+    }
+
+    public void setAnoReferente(Integer anoReferente) {
+        this.anoReferente = anoReferente;
     }
 
     public String getSocio() {

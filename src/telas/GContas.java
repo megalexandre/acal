@@ -8,7 +8,7 @@ import dao.DaoContasMensais;
 import dao.DaoEnderecoPessoa;
 import entidades.Conta;
 import entidades.Enderecopessoa;
-import entidades.view.Geracaocontas;
+import entidades.Geracaocontas;
 import entidades.Hidrometro;
 import entidades.Taxa;
 import entidades.Taxasconta;

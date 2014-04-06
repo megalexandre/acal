@@ -9,7 +9,7 @@ import dao.DaoEndereco;
 import dao.view.DaoSocioView;
 import entidades.Categoriasocio;
 import entidades.Endereco;
-import entidades.view.SociosView;
+import entidades.SociosView;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +30,7 @@ import util.HibernateUtil;
  *
  * @author netservidor
  */
-public class TelaRelatoriosContas extends javax.swing.JFrame {
+public final class TelaRelatoriosContas extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaRelatoriosContas
@@ -885,7 +885,7 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
         }
         else
         {
-            //   SimpleDateFormat.getDateInstance().parse(jFormattedTextFieldDataMaior.getText());
+            
             jFormattedTextFieldDataMaior.setDate(new Date());
             jFormattedTextFieldDataMenor.setDate(null);
             jFormattedTextFieldDataMaior.setEnabled(false);
@@ -953,7 +953,9 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                     int cont = 0;
                     int and = 0;
 
-                    final String where= " where "  ;
+                    final String contaNormal   = " WHERE ";
+                    final String contaAtrasada = " WHERE ";
+                    final String contaSocio    = " WHERE ";
                     
                     String id        = null;
                     String status    = null;
@@ -1027,7 +1029,7 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                         TipoCar = "( s.socioExclusivo = 1)";
                     }
                     
-                    if(cont>=1){sql = where;}
+                    if(cont>=1){sql = contaNormal;}
 
                     if(jCheckBoxId.isSelected())
                     {
@@ -1072,11 +1074,11 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                     if(jCheckBoxData.isSelected())
                     {
                         if((
-                          jCheckBoxId.isSelected()   ||
+                          jCheckBoxId.isSelected()         ||
                           jCheckBoxStatus.isSelected()     ||
-                          jCheckBoxCategoria.isSelected()||
-                          jCheckBoxSocio.isSelected()||
-                          jCheckBoxLogradouro.isSelected()||
+                          jCheckBoxCategoria.isSelected()  ||
+                          jCheckBoxSocio.isSelected()      ||
+                          jCheckBoxLogradouro.isSelected() ||
                           jCheckBoxDataVecimento.isSelected()
                           )&&(and!=0))
                           {
@@ -1092,11 +1094,11 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                      if(jCheckBoxCategoria.isSelected())
                     {
                         if((
-                          jCheckBoxId.isSelected()   ||
+                          jCheckBoxId.isSelected()         ||
                           jCheckBoxStatus.isSelected()     ||
-                          jCheckBoxData.isSelected()||
-                          jCheckBoxSocio.isSelected()||
-                          jCheckBoxLogradouro.isSelected()||
+                          jCheckBoxData.isSelected()       ||
+                          jCheckBoxSocio.isSelected()      ||
+                          jCheckBoxLogradouro.isSelected() ||
                           jCheckBoxDataVecimento.isSelected()
                           )&&(and!=0))
                           {
@@ -1112,9 +1114,9 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                     if(jCheckBoxSocio.isSelected())
                     {
                         if((
-                          jCheckBoxId.isSelected()     ||
-                          jCheckBoxStatus.isSelected()     ||
-                          jCheckBoxCategoria.isSelected()||
+                          jCheckBoxId.isSelected()        ||
+                          jCheckBoxStatus.isSelected()    ||
+                          jCheckBoxCategoria.isSelected() ||
                           jCheckBoxData.isSelected()      ||
                           jCheckBoxLogradouro.isSelected()||
                           jCheckBoxDataVecimento.isSelected()
@@ -1177,10 +1179,7 @@ public class TelaRelatoriosContas extends javax.swing.JFrame {
                     else if(jCheckRegristro.isSelected()){sql += " order by cs.nome ";     cont++;}
                     else if(jCheckCategoria.isSelected()){sql += " order by p.sobrenome "; cont++;}
                     else if(jCheckLogradouro.isSelected()){sql += " order by ep.numero "; cont++;}
-                 
-                
-                    System.out.println(sql);
-                    
+                                     
                     try {                
                         Connection conn = HibernateUtil.getConnection();
                         Map<String, Object> p = new HashMap<>();

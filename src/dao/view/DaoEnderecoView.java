@@ -5,7 +5,7 @@
 package dao.view;
 
 import entidades.Endereco;
-import entidades.view.EnderecoView;
+import entidades.EnderecoView;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;

@@ -4,7 +4,7 @@
  */
 package dao.view;
 
-import entidades.view.RcCaixaCompleto;
+import entidades.RcCaixaCompleto;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
