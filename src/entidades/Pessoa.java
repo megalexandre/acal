@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 
 public class Pessoa implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCedente")
+    private List<Entrada> entradaList;
     @Column(name = "cnpj")
     private String cnpj;
    
@@ -356,6 +358,15 @@ public class Pessoa implements Serializable {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    @XmlTransient
+    public List<Entrada> getEntradaList() {
+        return entradaList;
+    }
+
+    public void setEntradaList(List<Entrada> entradaList) {
+        this.entradaList = entradaList;
     }
     
 }

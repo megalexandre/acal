@@ -44,6 +44,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "RcConta.findByTaxas", query = "SELECT r FROM RcConta r WHERE r.taxas = :taxas"),
     @NamedQuery(name = "RcConta.findByTotalconta", query = "SELECT r FROM RcConta r WHERE r.totalconta = :totalconta")})
 public class RcConta implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "taxas")
+    private int taxas;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "numeroconta")
@@ -80,8 +83,6 @@ public class RcConta implements Serializable {
     private Double excessoLTd;
     @Column(name = "excessoValor")
     private Double excessoValor;
-    @Column(name = "taxas")
-    private BigDecimal taxas;
     @Column(name = "totalconta")
     private Double totalconta;
 
@@ -192,20 +193,20 @@ public class RcConta implements Serializable {
         this.excessoValor = excessoValor;
     }
 
-    public BigDecimal getTaxas() {
-        return taxas;
-    }
-
-    public void setTaxas(BigDecimal taxas) {
-        this.taxas = taxas;
-    }
-
     public Double getTotalconta() {
         return totalconta;
     }
 
     public void setTotalconta(Double totalconta) {
         this.totalconta = totalconta;
+    }
+
+    public int getTaxas() {
+        return taxas;
+    }
+
+    public void setTaxas(int taxas) {
+        this.taxas = taxas;
     }
     
 }

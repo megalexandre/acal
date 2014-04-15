@@ -4159,7 +4159,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jTextFieldSocioCEP" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldSocioCidade" pref="159" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldSocioCep2" pref="159" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -4172,7 +4172,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                               <Component id="jLabel82" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldSocioCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldSocioCep2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel83" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -4272,7 +4272,7 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSocioAdicionarLogradouroActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JFormattedTextField" name="jTextFieldSocioCidade">
+                            <Component class="javax.swing.JFormattedTextField" name="jTextFieldSocioCep2">
                               <Properties>
                                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                                   <Format format="#####-###" subtype="-1" type="5"/>

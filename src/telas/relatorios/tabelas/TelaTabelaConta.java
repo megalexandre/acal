@@ -1,7 +1,6 @@
 package telas.relatorios.tabelas;
 
 import TableModel.CaixaCompletoTableModel;
-import TableModel.render.Render;
 import dao.view.DaoCaixaView;
 import dao.view.DaoContaView;
 import dao.view.DaoEnderecoView;
@@ -33,11 +32,13 @@ public class TelaTabelaConta extends javax.swing.JFrame {
    private CaixaCompletoTableModel pModelTela;
    private CaixaCompletoTableModel pModelBanco;
    
-   private final int _socio;
-   private final int _logradouro;
-   private final int _status;
-   private boolean existeAtraso   =false;
-   private boolean existeCarne       =false;
+   private final int _socio  = 1;
+   private final int _logradouro = 2;
+   private final int _status = 4;
+
+   private int existeAtraso   = 0;
+   private int existeCarne    = 0;
+   private int existeConta    = 0;
    
    private final int checkSocio              =1;
    private final int checkLogradouro         =2;
@@ -50,22 +51,15 @@ public class TelaTabelaConta extends javax.swing.JFrame {
    private final int aberta = 1;
    private final int paga   = 2;
    private final int vencida= 3;
-   
+
    private final int EscolhaSocio = 1;
    private final int EscolhaEndereco =2;
-   
     
    String sqlnormal    ="";
    String sqlatrasadas ="";
    String sqlCarne     ="";
-   
-   
-    public TelaTabelaConta() {
-        
-        this._socio = 1;
-        this._logradouro = 2;
-        this._status = 4;
-        
+      
+    public TelaTabelaConta() {        
         initComponents();
         inicializer();
     }
@@ -99,8 +93,8 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     jTabTela .setModel(pModelTela);
     adicionarEventosTela(jTabTela);
     adicionarEventosBanco(jTabBanco);
-    jTabTela.setDefaultRenderer(Object.class, new Render());
-    jTabBanco.setDefaultRenderer(Object.class, new Render());
+    //jTabTela.setDefaultRenderer(Object.class, new Render());
+    //jTabBanco.setDefaultRenderer(Object.class, new Render());
     
    }
    
@@ -553,7 +547,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
             }
         });
 
-        jButtonExportar2.setText("Limpar Banco");
+        jButtonExportar2.setText("Limpar Consulta");
         jButtonExportar2.setPreferredSize(new java.awt.Dimension(100, 23));
         jButtonExportar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -627,6 +621,11 @@ public class TelaTabelaConta extends javax.swing.JFrame {
         jComboBoxSocio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Aberta", "Paga", "Vencida" }));
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
         jComboBoxStatus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jComboBoxStatusKeyPressed(evt);
@@ -816,7 +815,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     
     private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
                  
-      Thread t;
+      Thread t;  
        t = new Thread ()  
        {
            @Override
@@ -834,68 +833,79 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                
                else{
 
-                   Calendar c60 = Calendar.getInstance();
+                   Calendar datacompara = Calendar.getInstance();
+                   datacompara.set(Calendar.MONTH, -2 );
+                   
                    Calendar dataConta = Calendar.getInstance();
-                   c60.set(Calendar.MONTH, -2 );
+                   
                    
                    
                    for (int i = 0; i < pModelTela.getRowCount(); i++) {
                        
                        //quem vai receber o relatorio de socio
                        if(pModelTela.getLinha(i).getSocioExclusivo()==true){
-                           existeCarne = true;
-                           if(i==0){sqlCarne+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
-                           else    {sqlCarne+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
-                           
+                           existeCarne++;
+                           if(existeCarne==1){sqlCarne+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                           else              {sqlCarne+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                              
                        }
+                       //quem vai receber o relatorio normal de conta
                        else{
-                           //quem vai receber o relatorio normal de conta
-                           if(i==0){sqlnormal+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
-                           else    {sqlnormal+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                           existeConta++;
+                           if(existeConta==1){sqlnormal+= "\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                           else              {sqlnormal+= "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
                        }
-                       
-                       //converter data pra calendar
-                       
-                            
-                       //quem vai receber uma carta de cobrança?
-                       //quem tem o pagamento como nulo
-                       //e o vencimento esta atrasado a mais de 60 dias
-                        Date dconta = pModelTela.getLinha(i).getVencimento();
-                        dataConta.setTime(dconta);
-                       
-                       
-                       if (
-                          (pModelTela.getLinha(i).getPagamento() == null)&&
-                          (dataConta.after(c60))         
-                           )
-                            {
-                          
-                           existeAtraso = true;
-                           if(i == 0){sqlatrasadas += "\n c.id = "    + pModelTela.getLinha(i).getNumeroconta();}
-                           else      {sqlatrasadas += "\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
-                            }
-                   }
+                   
+                       //carregar o calendar com a data da conta
+                       dataConta.setTime(pModelTela.getLinha(i).getData());
+                       //quem vai receber cobraças de atraso.
+                       if(
+                               (pModelTela.getLinha(i).getPagamento()==null) &&
+                               (dataConta.after(datacompara))
+                               )
+                       {
+                           existeAtraso++;
+                           if(existeAtraso==1){sqlatrasadas+="\n c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                           else               {sqlatrasadas+="\n or c.id = " + pModelTela.getLinha(i).getNumeroconta();}
+                       }
+                   }   
                }
                
                sqlnormal   += "\n group by c.id ";
                sqlatrasadas+= "\n group by c.id ";
                sqlCarne    += "\n group by c.id ";
                
+               int messagem = 0;
                
-               relatar("/relatorios/rc_novaConta.jasper", sqlnormal);
-               
-               if(existeAtraso==true){
-                   relatar("/relatorios/rc_cobranca.jasper", sqlatrasadas );
+               if(existeConta>0){
+                   relatar("/relatorios/rc_novaConta.jasper", sqlnormal,"Normal");
+                   messagem +=1;
                }
-               if(existeCarne==true)
+               if(existeAtraso>0){
+                   relatar("/relatorios/rc_cobranca.jasper", sqlatrasadas ,"Cobraça");
+                   messagem +=2;
+               }
+               if(existeCarne>0)
                {
-                   JOptionPane.showMessageDialog(null, "A funcionalidade para carne de socios ainda não esta pronta");
+                   relatar("/relatorios/rc_socio.jasper", sqlatrasadas ,"Socio");
+                   messagem +=4;
                }
+               switch(messagem)
+               {
+                  case 1:
+                  break;
+                  case 2:    
+                  break;
+                  case 4:
+                  break;
+                     
+               }
+               
                
            }
        };
       t.start();
-        limparVariaveisDeImpressaoConta();
+      limparVariaveisDeImpressaoConta();
       
     }//GEN-LAST:event_jButtonExportarActionPerformed
 
@@ -1057,8 +1067,12 @@ public class TelaTabelaConta extends javax.swing.JFrame {
         buscar();
     }//GEN-LAST:event_jComboBoxStatusKeyPressed
 
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
+
     
-    public void relatar(String relatorio, String sql){
+    public void relatar(String relatorio, String sql, String tipoRelatorio){
     
       try 
         {   
@@ -1073,14 +1087,18 @@ public class TelaTabelaConta extends javax.swing.JFrame {
         }
         catch (Exception ex) 
         {
-         JOptionPane.showMessageDialog(null, "Erro: \nRélatorio não pode ser emitido perfeitamente. \n "+sql);
+         JOptionPane.showMessageDialog(null, "Erro: \nRélatorio "+tipoRelatorio+ " não pode ser emitido perfeitamente. \n "+sql);
          Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void buscar(){     
-     pModelBanco.limpar();      
+
+        pModelBanco.limpar();      
+     
+        //buscar por pagamento!
         if(jCheckBoxPagamento.isSelected()){
+            
             if(jDatePagamentoInicio.getDate()==null){
               JOptionPane.showMessageDialog(null, "É preciso escolher o Pagamento inicial");
               jDatePagamentoInicio.requestFocus();
@@ -1102,6 +1120,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
             }
         }
         
+        //buscar por vencimento
         else if(jCheckVencimento.isSelected()){
         
             if(jDateVencimentoInicio.getDate()==null){
@@ -1123,17 +1142,20 @@ public class TelaTabelaConta extends javax.swing.JFrame {
             contar();
             }
         }
+        //buscar por logradouro ou socio ou status
         else if(jCheckLogradouro.isSelected() || jCheckSocio.isSelected() || jCheckStatus.isSelected()){
+     
             int ativos = 0;
             
             if(jCheckSocio.isSelected())      {ativos += _socio;}
             if(jCheckLogradouro.isSelected()) {ativos += _logradouro;}
             if(jCheckStatus.isSelected())     {ativos += _status;}
             
+           
             switch(ativos){
                 
             case(checkSocio):
-                if(jComboBoxSocio.getSelectedIndex()==0){
+                if(jComboBoxSocio.getSelectedIndex()==0){                
                  JOptionPane.showMessageDialog(null, "Escolha um Socio"); jComboBoxSocio.requestFocus();
                 }
                 else{
@@ -1181,7 +1203,7 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                 }
                 break;
             case(checkSocio_status):
-                
+           
                 if(jComboBoxStatus.getSelectedIndex()==0){
                    JOptionPane.showMessageDialog(null, "Escolha um Status");
                    jComboBoxStatus.requestFocus();
@@ -1191,11 +1213,12 @@ public class TelaTabelaConta extends javax.swing.JFrame {
                    jComboBoxSocio.requestFocus();
                 }
                 else{
-                    if     (jComboBoxStatus.getSelectedIndex()==0){
+                    if    (jComboBoxStatus.getSelectedIndex()==0){
                         JOptionPane.showMessageDialog(null,"Escolha um Status");
                         jComboBoxStatus.requestFocus();
                     }
                     else if(jComboBoxStatus.getSelectedIndex()==1){
+                    
                         pModelBanco.addListaDeConta(new DaoCaixaView().BuscarSocioStatus(aberta, jComboBoxSocio.getSelectedItem().toString()));
                     }
                     else if(jComboBoxStatus.getSelectedIndex()==2){
@@ -1288,12 +1311,12 @@ public class TelaTabelaConta extends javax.swing.JFrame {
     jDateVencimentoFim.setDate(null);
     }
     
-    private boolean setAtrasadas(boolean qtd){
+    private int setAtrasadas(int qtd){
         existeAtraso = qtd;
     return existeAtraso;
     }
     
-    private boolean getAtrasadsa()
+    private int getAtrasadsa()
     {
     return existeAtraso;
     }
@@ -1302,8 +1325,8 @@ public class TelaTabelaConta extends javax.swing.JFrame {
      sqlnormal    ="  ";
      sqlatrasadas ="  ";
      sqlCarne ="  ";
-     existeCarne = false;
-     existeAtraso = false;
+     existeCarne = 0;
+     existeAtraso = 0;
     
     }
     public static void main(String args[]) {

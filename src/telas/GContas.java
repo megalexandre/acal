@@ -675,7 +675,7 @@ public class GContas extends javax.swing.JFrame {
                                         taxas1.add(tx);  
                                         }
                                         //lista de taxasConta na conta...
-                                        c.setTaxascontaList(taxas1);
+                                        //c.setTaxascontaList(taxas1);
                                         new DaoContasMensais().AdicionarConta(c);
 
                                     } //se tiver selecionado as contas com hidrometro
@@ -715,7 +715,7 @@ public class GContas extends javax.swing.JFrame {
                                         h.setIdconta(c);
                                         h.setConsumo((double)model.getValueAt(i, 9));
                                         //lista de taxasConta na conta...
-                                        c.setTaxascontaList(taxas1);
+                                       // c.setTaxascontaList(taxas1);
                                         c.setHidrometro(h);
                                         new DaoContasMensais().AdicionarConta(c); 
                                         
@@ -817,7 +817,7 @@ public class GContas extends javax.swing.JFrame {
                                         taxas1.add(tx);  
                                         }
                                         //lista de taxasConta na conta...
-                                        c.setTaxascontaList(taxas1);
+                                       // c.setTaxascontaList(taxas1);
                                         new DaoContasMensais().AdicionarConta(c);
 
                                     } //se tiver selecionado as contas com hidrometro
@@ -857,7 +857,7 @@ public class GContas extends javax.swing.JFrame {
                                         h.setIdconta(c);
                                         h.setConsumo((double)model.getValueAt(i, 9));
                                         //lista de taxasConta na conta...
-                                        c.setTaxascontaList(taxas1);
+                                       // c.setTaxascontaList(taxas1);
                                         c.setHidrometro(h);
                                         new DaoContasMensais().AdicionarConta(c); 
                                         

@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rc_novaConta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63fa3ee1-3841-434e-bbd2-bd4e9547e776">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="173"/>
+	<property name="ireport.y" value="128"/>
 	<parameter name="complementos" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-
+            
 		<![CDATA[select
 
 c.id         as numeroconta,
@@ -44,9 +44,7 @@ s.numeroSocio,
 cs.nome as categoriaSocio,
 
 -- taxa de socio
-
 t.valor as taxaSocio,
-
 
 -- dados do hidrometro
 -- consumo em litros
@@ -59,27 +57,21 @@ WHEN ((h.Consumo - (15000) ) < 0 ) THEN 0
 ELSE (h.Consumo -  (15000))
 END ) ,0)as excessoLTd,
 
-
 -- valor de excesso em reais
-
 COALESCE(
 (CASE
 WHEN ((h.Consumo - (15000) ) < 0 ) THEN 0
 ELSE ((h.Consumo - (15000))* (select valor FROM taxa where id = 20))/10
-
 END ) ,0)as excessoValor,
 
+( 0) as taxas
 
-
+,
+(t.valor +
 COALESCE(
-sum(t2.valor), 0
-) as taxas
-
-
-, (t.valor + COALESCE(
 (CASE
 WHEN ((h.Consumo - (15000) ) < 0 ) THEN 0
-ELSE ((h.Consumo - (15000))*(select valor FROM taxa where id = 20))/10
+ELSE ((h.Consumo - (15000))* (select valor FROM taxa where id = 20))/10
 END ) ,0))
 AS totalconta
 
@@ -96,6 +88,7 @@ left  join taxasconta     tc on  c.id = tc.contaid
 left  join taxa           t2 on  t2.id = tc.taxaid
 
 $P!{complementos}]]>
+
 	</queryString>
 	<field name="numeroconta" class="java.lang.Integer"/>
 	<field name="data" class="java.sql.Timestamp"/>
@@ -553,6 +546,11 @@ Email : Acallages@hotmail.com]]></text>
 			</textField>
 			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
 				<reportElement x="212" y="204" width="133" height="20" uuid="001a3297-bb01-4cc9-92b7-9375a00d24c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pagamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="212" y="355" width="133" height="20" uuid="211b1775-7293-414a-8cb9-8c0ce2e9bff6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{pagamento}]]></textFieldExpression>
 			</textField>

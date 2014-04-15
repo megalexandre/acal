@@ -487,7 +487,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonExportar2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Limpar Banco"/>
+                <Property name="text" type="java.lang.String" value="Limpar Consulta"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 23]"/>
                 </Property>
@@ -606,6 +606,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxStatusActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jComboBoxStatusKeyPressed"/>
               </Events>
             </Component>

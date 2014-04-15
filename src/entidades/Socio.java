@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 
 public class Socio implements Serializable {
+    @Column(name = "carneDiferenciado")
+    private Boolean carneDiferenciado;
     @Column(name = "SocioExclusivo")
     private Boolean socioExclusivo;
     @Basic(optional = false)
@@ -212,6 +214,14 @@ public class Socio implements Serializable {
 
     public void setSocioExclusivo(Boolean socioExclusivo) {
         this.socioExclusivo = socioExclusivo;
+    }
+
+    public Boolean getCarneDiferenciado() {
+        return carneDiferenciado;
+    }
+
+    public void setCarneDiferenciado(Boolean carneDiferenciado) {
+        this.carneDiferenciado = carneDiferenciado;
     }
     
 }

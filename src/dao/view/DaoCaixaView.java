@@ -8,6 +8,7 @@ import entidades.CaixaView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -241,6 +242,7 @@ public class DaoCaixaView {
     
     public List<CaixaView> BuscarSocioStatus(int status, String socio) {
        
+       
         List<CaixaView> contas = null;
         Session sessao = null; 
         Query query = null;
@@ -250,21 +252,26 @@ public class DaoCaixaView {
            sessao = HibernateUtil.getSessionFactory().openSession();
            transacao = sessao.beginTransaction();
            if(status == 1){//aberta
-            query = sessao.createQuery("from CaixaView where pagamento is null and socio = :socio");
+            query = sessao.createQuery("from CaixaView where socio = :socio ");
+            query.setParameter("socio", socio);
             
            }
            else if (status==2){//paga
             query = sessao.createQuery("from CaixaView where pagamento is not null and socio = :socio");   
+            query.setParameter("socio", socio);
+            
            }
            else if (status==3){//vencida
             Date d = new Date();
             query = sessao.createQuery("from CaixaView where vencimento <= :data and pagamento is null and socio = :socio");   
             query.setParameter("data", d);
+            query.setParameter("socio", socio);
+            
            }
            
-           query.setParameter("socio", socio);
            contas = query.list();
            transacao.commit(); 
+
            
         }
         catch(HibernateException e)
@@ -331,7 +338,7 @@ public class DaoCaixaView {
            sessao = HibernateUtil.getSessionFactory().openSession();
            transacao = sessao.beginTransaction();
            if(status == 1){//aberta
-            query = sessao.createQuery("from CaixaView where pagamento is null and socio = :socio and endereco = :endereco");
+            query = sessao.createQuery("from CaixaView where pagamento is null and socio = :socio and endereco = :endereco and " );
             
            }
            else if (status==2){//paga

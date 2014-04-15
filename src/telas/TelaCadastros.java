@@ -453,7 +453,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         Logradouro2 = new javax.swing.JLabel();
         jComboBoxSocioUF = new javax.swing.JComboBox();
         jButtonSocioAdicionarLogradouro = new javax.swing.JButton();
-        jTextFieldSocioCidade = new javax.swing.JFormattedTextField();
+        jTextFieldSocioCep2 = new javax.swing.JFormattedTextField();
         jPanel23 = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel36 = new javax.swing.JPanel();
@@ -3154,7 +3154,7 @@ public class TelaCadastros extends javax.swing.JFrame {
             });
 
             try {
-                jTextFieldSocioCidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+                jTextFieldSocioCep2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
             } catch (java.text.ParseException ex) {
                 ex.printStackTrace();
             }
@@ -3197,7 +3197,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                     .addGap(18, 18, 18)
                     .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextFieldSocioCEP)
-                        .addComponent(jTextFieldSocioCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                        .addComponent(jTextFieldSocioCep2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                     .addContainerGap())
             );
             jPanel28Layout.setVerticalGroup(
@@ -3207,7 +3207,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                     .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel82)
-                            .addComponent(jTextFieldSocioCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldSocioCep2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel83)
                             .addComponent(jComboBoxSocioUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -5117,7 +5117,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                         }
                         
                         p.setNumeroEndereco(jTextFieldSocioNumero.getText());
-                        p.setCidade(jTextFieldSocioCidade.getText());
+                        p.setCidade(jTextFieldSocioCep2.getText());
                         p.setBairro(jTextFieldSocioBairro.getText());
                         p.setCep(jTextFieldSocioCEP.getText());
 
@@ -5243,7 +5243,7 @@ public class TelaCadastros extends javax.swing.JFrame {
                         }
                         
                         p.setNumeroEndereco(jTextFieldSocioNumero.getText());
-                        p.setCidade(jTextFieldSocioCidade.getText());
+                        p.setCidade(jTextFieldSocioCep2.getText());
                         p.setBairro(jTextFieldSocioBairro.getText());
                         p.setCep(jTextFieldSocioCEP.getText());
 
@@ -5359,7 +5359,7 @@ public class TelaCadastros extends javax.swing.JFrame {
     }
    
                         p.setNumeroEndereco(jTextFieldSocioNumero.getText());
-                        p.setCidade(jTextFieldSocioCidade.getText());
+                        p.setCidade(jTextFieldSocioCep2.getText());
                         p.setBairro(jTextFieldSocioBairro.getText());
                         p.setCep(jTextFieldSocioCEP.getText());
 
@@ -6954,7 +6954,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jFormattedTextFieldSocioDataEmissao.setEditable(edit);
         jTextFieldSocioNumero.setEditable(edit);
         jTextFieldSocioBairro.setEditable(edit);
-        jTextFieldSocioCidade.setEditable(edit);
+        jTextFieldSocioCep2.setEditable(edit);
         jComboBoxSocioUF.setEnabled(edit);
         jTextFieldSocioCEP.setEditable(edit);
         buttonGroupSocioAprovacao.clearSelection();
@@ -6988,7 +6988,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jFormattedTextFieldSocioDataEmissao.setEditable(edit);
         jTextFieldSocioNumero.setEditable(edit);
         jTextFieldSocioBairro.setEditable(edit);
-        jTextFieldSocioCidade.setEditable(edit);
+        jTextFieldSocioCep2.setEditable(edit);
         jComboBoxSocioUF.setEnabled(edit);
         jTextFieldSocioCEP.setEditable(edit);
         buttonGroupSocioAprovacao.clearSelection();
@@ -7135,7 +7135,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jFormattedTextFieldSocioDataEmissao.setText("");
         jTextFieldSocioNumero.setText("");
         jTextFieldSocioBairro.setText("");
-        jTextFieldSocioCidade.setText("");
+        jTextFieldSocioCep2.setText("");
         jComboBoxSocioUF.setSelectedItem("");
         jTextFieldSocioCEP.setText("");
         if (jComboBoxSocioLogradouro.getItemCount() != 0) {
@@ -7290,7 +7290,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         jTextFieldSocioRgNumero.setText(socio.getIdPessoa().getRgNumero());
         jTextFieldSocioOrgaoExpedidor.setText(socio.getIdPessoa().getRgExpedidor());
         jTextFieldSocioNumero.setText(socio.getIdPessoa().getEnderecopessoaList().get(0).getNumero());
-        jTextFieldSocioCidade.setText(socio.getIdPessoa().getCidade());
+        jTextFieldSocioCep2.setText(socio.getIdPessoa().getCidade());
         jTextFieldSocioBairro.setText(socio.getIdPessoa().getBairro());
         jTextFieldSocioCEP.setText(socio.getIdPessoa().getCep());            
         jTextFieldSocioNumeroSocio.setText(String.valueOf(socio.getNumeroSocio()));
@@ -7414,7 +7414,7 @@ public class TelaCadastros extends javax.swing.JFrame {
         }
         jComboBoxSocioLogradouro.setSelectedItem(pessoa.getIdEndereco().getTipo()+" "+pessoa.getIdEndereco().getNome());
         jTextFieldSocioNumero.setText(pessoa.getNumeroEndereco());
-        jTextFieldSocioCidade.setText(pessoa.getCidade());
+        jTextFieldSocioCep2.setText(pessoa.getCidade());
         jTextFieldSocioBairro.setText(pessoa.getBairro());
         jComboBoxSocioUF.setSelectedItem(pessoa.getUf());
         jTextFieldSocioCEP.setText(pessoa.getCep());
@@ -8247,7 +8247,7 @@ public class TelaCadastros extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSocioApelido;
     private javax.swing.JTextField jTextFieldSocioBairro;
     private javax.swing.JTextField jTextFieldSocioCEP;
-    private javax.swing.JFormattedTextField jTextFieldSocioCidade;
+    private javax.swing.JFormattedTextField jTextFieldSocioCep2;
     private javax.swing.JTextField jTextFieldSocioEmail;
     private javax.swing.JTextField jTextFieldSocioID;
     private javax.swing.JTextField jTextFieldSocioNome;

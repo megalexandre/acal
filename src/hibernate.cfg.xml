@@ -30,11 +30,11 @@
     <mapping class="entidades.Enderecopessoa"/>
     
     <mapping class="entidades.Sociotabela"/>
-    <mapping class="entidades.view.Geracaocontas"/>
-    <mapping class="entidades.view.SociosView"/>
-    <mapping class="entidades.view.CaixaView"/>
-    <mapping class="entidades.view.RcCaixaCompleto"/>
-    <mapping class="entidades.view.EnderecoView"/>
+    <mapping class="entidades.Geracaocontas"/>
+    <mapping class="entidades.SociosView"/>
+    <mapping class="entidades.CaixaView"/>
+    <mapping class="entidades.RcCaixaCompleto"/>
+    <mapping class="entidades.EnderecoView"/>
   
   </session-factory>
 </hibernate-configuration>
